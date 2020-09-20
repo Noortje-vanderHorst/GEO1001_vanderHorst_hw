@@ -274,3 +274,12 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+# own files, not from Tex gitignore package
+GEO1001_hw01_A1_means.csv
+GEO1001_hw01_A1_stds.csv
+GEO1001_hw01_A1_vars.csv
+GEO1001_hw01_A4_intervals.csv
+GEO1001_hw01_A4_ttest.csv
+__pycache__
+hw01
