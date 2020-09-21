@@ -56,7 +56,7 @@ def confidenceIntervalCdf(data_all_sensors, column_name):
         current_sensor_data = data_all_sensors[sensor_names.index(sensor)][column_name]
         cdf = thinkstats2.Cdf(current_sensor_data, label=column_name)
         # thinkplot.Cdf(cdf, color='b')   # color parameter because the thinkplot default color array was not long enough
-        # thinkplot.Show(xlabel=column_name, ylabel='CDF')    # enable for seeing the CMF plot
+        # thinkplot.Show(xlabel=column_name, ylabel='CDF')    # enable for seeing the CDF plot
         interval_min = thinkstats2.Cdf.Value(cdf, p=0.025)
         interval_max = thinkstats2.Cdf.Value(cdf, p=0.975)
         interval_mean = round(current_sensor_data.mean(), 1)

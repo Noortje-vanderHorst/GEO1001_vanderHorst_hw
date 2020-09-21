@@ -126,7 +126,7 @@ def frequencyPolygons(data_all_sensors):
     plt.gca().legend(sensor_names)
     plt.xlabel("Temperature [degrees Celsius]")
     plt.ylabel("Times temperature was measured")
-    x_axis_label_points = np.round(midpoints, 1)
+    # x_axis_label_points = np.round(midpoints, 1)
     plt.xticks(np.linspace(0, 35, 8))
     plt.show()
 

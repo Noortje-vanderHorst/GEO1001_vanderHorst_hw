@@ -8,7 +8,7 @@
 
 
 \title{GEO1001 Homework 01 Report}
-\author{Noortje van der Horst}
+\author{Noortje van der Horst (4697952)}
 \date{21 September 2020}
 
 \begin{document}
@@ -152,6 +152,9 @@
 
 	From Firgue \ref{fig:freqpols} it is again visible that the Temperature meansurements for the 5 sensors follow roughtly the same distribution. Sensor E measured higher temperatures, visible in a shorter "left tail" and longer "right tail". All sensors peaks lie around 17 degrees Celsius, this is also where their means will roughly be located.
 	
+	The figure was made by using the pyplot histogram function. The bins (x-values) were converted into an array of midpoints between all the bin edge points, so each middle point of the histogram bins would correspond to one x-value of the frequency polygon. At the beginning and end of this array, at a distance corresponding with the rest of the series, two zeroes were added, so the polygons would meet the x-axis. Hight values were then interpolated using the histogram values before, and plotted as a line with pyplot. The alpha value of the histograms was set to 0, so only the frequency polygons would be visible in the final plot. The number of bins was determined by simply using pyplots 'auto' parameter, this gave a clear enough image no modifications seemed necessary. The ticks of the x-axis had to be manually set, since using the midpoints themselves resulted in too many x-values to be legible.
+	
+	
 	\subsection{Question 1.4}
 	\textbf{Generate 3 plots that include the 5 sensors boxplot for: Wind Speed, Wind Direction and Temperature.}
 	
@@ -176,6 +179,20 @@
 			\label{fig:boxtemp}
 		\end{subfigure}
 	\end{figure}
+
+	From the Wind Speed boxplot, it can be seen that this variable was measured significantly lower for sensor E. Its minimum value is also barely visible, and it's overal range is also significantly lower than the rest of the sensors. Sensor A to D seem to have about the same interquantile range, with medians also at about the same location. Sensor D has a slightly higher median, IQR, and maximum. All minima are at 0: the sensors may have measured a number of times when there was very little wind. All sensors have many outliers at the top. A possible explaination could be that they have measured a number of high speed wind "bursts", which seems plausible wind behavior.
+	
+	Figure \ref{fig:boxdir} shows a larger difference between sensors. Maxima and minima are at the same values, except for sensor E. The other sensors measured wind from all directions between their minumum and maximum. Sensor E has many outliers below its minimum: it measured wind from the E/NE direction sometimes, but rarely. There might be a blockade in this direction at sensor E's location, and/or it might have only measured wind from this direction when there was a storm. Sensor B and C's median are both at S/SE, while sensor A's is at W/SW, and sensor D's at SW. All sensor's IQR lies between about W and SE, meaning most wind came from this direction. These plots do correspond with the overal measured wind directions in the Netherlands (Figure \ref{fig:winddirnl}). Interestingly, this also shows the outliers of sensor E in the east/north-east direction.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{GEO1001_hw01_images/WindRose_IJmuiden.png}
+		\caption{ Wind rose at the IJmuiden weather station based on 10-minute data from January 1, 2007 up to and including December 31, 2016.}
+		\label{fig:winddirnl}
+	\end{figure}
+	
+	\newpage % The first sentence of this paragraph was half displayed on a different page
+	The boxplot for Temperature shows little difference between sensors. Sensor E has fewer outliers at the bottom, and more outliers at the highest temperatures. Median and IQR are approximately the same for all sensors. Outliers were detected at the bottom as wel as the top. The measured temperature might only have been very cold and very warm sporadically, showing a moderate climate. Minima seem to be around 7 degrees celsius for all sensors, while maxima are around 27 degrees. Taking into account that measurements were done during the summer, these values seem locical considering the Netherlands's climate.
 	
 	
 	\section{Lesson A2}
@@ -183,21 +200,30 @@
 	\subsection{Question 2.1}
 	\textbf{Plot PMF, PDF and CDF for the 5 sensors Temperature values. Describe the behaviour of the distributions, are they all similar? what about their tails?}
 	
+	 The PMF was made using pyplot's histogram function. The data was first counted per measured temperature (using numpy.value\_counts), normalized and then sorted on increasing temperature values. This resulted in an array with the probability (0 to 1) per measured temperature value per sensor. This was then plotted as a bar plot.
+	
+	Except for higher values on the y-axis, the PDF shows the same as the PMF. This is because the PDF was made using pyplots histogram, with density set to true. Using the same amount of bins, this will result in the same shape as the PMF. The higher values on the x-axis are a characteristic of the PDF: instead of probability mass, these are the probability densities, meaning the area under the PDF will add up to 1 (instead of all the bar's probabilities itself).
+	
+	The CDF was done in the same way as the PDF, now with the historgam parameter cumulative also set to true. This results in a bar diagram, where each bar represents the probability of a value in that range, or less, occuring.
+	
+	From Question 1 it was clear that sensor E measured higher temperatures than the other sensors. The same distribution as the histograms and density polygons can be seen in the PMF and PDF (Figure \ref{fig:pmf}, \ref{fig:pdf}). The lower and upper tails seem to all have their own "local" peaks. The upper tail also seems to be generally longer than the lower for all sensor. This might be a result of measuring the temperature in the summer, when high values are more likely to occur. The effect is also visible in the CDF, where the lower tail of the curve is steeper than the upper tail. There also seems to be a slight "bump" in the lower tail of the CDF, corresponding with the local peaks in the PMF and PDF. The Temperature variable's probability funcitons look similar to the shapes of the PMF, PDF and CDF of a normal distribution. The peak, or mean, is slightly more to the left then would be expected. This is visible in the CDF as a smaller incline around this area. Why there would be local peaks in the tails is unclear to me. I speculate this might be a characteristic of complicated wheather phenomena, where low or high temperatures in summer only occur under specific special conditions.
+	
+	
 	\begin{figure}[H]
 		\centering
-		\begin{subfigure}[b]{0.85\linewidth}
+		\begin{subfigure}[b]{\linewidth}
 			\includegraphics[width=\linewidth]{GEO1001_hw01_images/GEO1001_hw01_A2_PMF.png}
 			\caption{Probability mass function, Temperature, all sensors}
 			\label{fig:pmf}
 		\end{subfigure}
 		
-		\begin{subfigure}[b]{0.85\linewidth}
+		\begin{subfigure}[b]{\linewidth}
 			\includegraphics[width=\linewidth]{GEO1001_hw01_images/GEO1001_hw01_A2_PDF.png}
 			\caption{Probability density function, Temperature, all sensors}
 			\label{fig:pdf}
 		\end{subfigure}
 		
-		\begin{subfigure}[b]{0.85\linewidth}
+		\begin{subfigure}[b]{\linewidth}
 			\includegraphics[width=\linewidth]{GEO1001_hw01_images/GEO1001_hw01_A2_CDF.png}
 			\caption{Cumulative density function, Temperature, all sensors}
 			\label{fig:cdf}
@@ -206,6 +232,10 @@
 	
 	\subsection{Question 2.2}
 	\textbf{For the Wind Speed values, plot the pdf and the kernel density estimation. Comment the differences.}
+	
+	In figure \ref{fig:kde} the PDF of Wind Speed values are combined with the kernel density estimation of it. This figure has the same y-axis, to be able to compare the distributions of all the sensors. Figure \ref{fig:kdeunequal} has an individually scaled y-axis, to better be able to view and compare the shapes of the PDFs and kdes. Sensor E has a very high density around 0, with the PDF even reaching 3. This means that a large amount of the time, this sensor did not measure any wind. In Figure \ref{fig:boxwind}, this was also visible as a significantly lower IQR, maximum, outliers and the minimum and 25th percentile both being on (or around) 0. This sensor is probably located in a more secluded area than the other sensors, where there is less wind. Even though the PDF of the other sensors shows a clear peak, the fitted kde's show 2, where the second one is sometimes even higher than the one corresponding to the PDF peak. The density of the kde at the peak(s) is also much lower than of the PDF. This is a result of the kde being an estimation. It is a funciotn that smoothes the data, and approaches a gaussian function (or what one would expect under a perfect normal distribution). The kde seems to be smooting out the outliers of the funciton, as well as limiting the skewedness.
+	
+	The kde was first made using pyplot's histogram, with the fitted kde being done by scipy's gaussian estimation. This proved slightly problematic, firstly because it is harder to compare the kde to a bar graph than a line, and secondly because the gaussian kde stopped at x=0, and did not return to the x-axis. The first issue was solved by taking the midpoints of the histogram, like was done for question 1.3, and plotting a line with those values. The second issue, however, seemed to be caused by the way scipy's gaussian kde itself functions. It did not plot any further than the extent of the used dataset, which did stop at 0. It was therefor decided to use seaborn's kde function after all, which had the same shape, but estimated the right tail all the way to the x-axis as well. Both methods are present in the pyhton files for this assignment.
 	
 	
 	\begin{figure}[h!]
