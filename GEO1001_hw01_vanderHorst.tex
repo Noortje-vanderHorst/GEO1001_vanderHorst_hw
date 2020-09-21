@@ -5,7 +5,9 @@
 \usepackage{placeins}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{natbib}
 
+\bibliographystyle{abbrvnat}
 
 \title{GEO1001 Homework 01 Report}
 \author{Noortje van der Horst (4697952)}
@@ -16,7 +18,7 @@
 	\maketitle
 	
 	\section{Lesson A1}
-	For this assignment you will use data collected from 5 heat stress sensors placed somewhere in the Netherlands during this summer. The sensors are Kestrel 5400 and their specs are included within the assignment materials. In order to identify if the dataset is of any value to your “employer”, it is your job to deeply analyse the dataset and derive hypothesis from it. The work you need to do for this assignment can roughly be subdivided in 4 tasks related to each independent lesson.
+	For this assignment you will use data collected from 5 heat stress sensors placed somewhere in the Netherlands during this summer. The sensors are Kestrel 5400 and their specs are included within the assignment materials. In order to identify if the dataset is of any value to your “employer”, it is your job to deeply analyse the dataset and derive hypothesis from it. The work you need to do for this assignment can roughly be subdivided in 4 tasks related to each independent lesson. Weather data used from \cite{Maiullari2020}
 	
 	
 	\subsection{Question 1.1}
@@ -182,12 +184,14 @@
 
 	From the Wind Speed boxplot, it can be seen that this variable was measured significantly lower for sensor E. Its minimum value is also barely visible, and it's overal range is also significantly lower than the rest of the sensors. Sensor A to D seem to have about the same interquantile range, with medians also at about the same location. Sensor D has a slightly higher median, IQR, and maximum. All minima are at 0: the sensors may have measured a number of times when there was very little wind. All sensors have many outliers at the top. A possible explaination could be that they have measured a number of high speed wind "bursts", which seems plausible wind behavior.
 	
-	Figure \ref{fig:boxdir} shows a larger difference between sensors. Maxima and minima are at the same values, except for sensor E. The other sensors measured wind from all directions between their minumum and maximum. Sensor E has many outliers below its minimum: it measured wind from the E/NE direction sometimes, but rarely. There might be a blockade in this direction at sensor E's location, and/or it might have only measured wind from this direction when there was a storm. Sensor B and C's median are both at S/SE, while sensor A's is at W/SW, and sensor D's at SW. All sensor's IQR lies between about W and SE, meaning most wind came from this direction. These plots do correspond with the overal measured wind directions in the Netherlands (Figure \ref{fig:winddirnl}). Interestingly, this also shows the outliers of sensor E in the east/north-east direction.
+	Figure \ref{fig:boxdir} shows a larger difference between sensors. Maxima and minima are at the same values, except for sensor E. The other sensors measured wind from all directions between their minumum and maximum. Sensor E has many outliers below its minimum: it measured wind from the E/NE direction sometimes, but rarely. There might be a blockade in this direction at sensor E's location, and/or it might have only measured wind from this direction when there was a storm. Sensor B and C's median are both at S/SE, while sensor A's is at W/SW, and sensor D's at SW. All sensor's IQR lies between about W and SE, meaning most wind came from this direction. These plots do correspond with the overal measured wind directions in the Netherlands (Figure \ref{fig:winddirnl}, \cite{journalpone}). Interestingly, this also shows the outliers of sensor E in the east/north-east direction.
+	
+	
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\linewidth]{GEO1001_hw01_images/WindRose_IJmuiden.png}
-		\caption{ Wind rose at the IJmuiden weather station based on 10-minute data from January 1, 2007 up to and including December 31, 2016.}
+		\caption{ Wind rose at the IJmuiden weather station based on 10-minute data from January 1, 2007 up to and including December 31, 2016. \cite{journalpone}.}
 		\label{fig:winddirnl}
 	\end{figure}
 	
@@ -206,7 +210,10 @@
 	
 	The CDF was done in the same way as the PDF, now with the historgam parameter cumulative also set to true. This results in a bar diagram, where each bar represents the probability of a value in that range, or less, occuring.
 	
-	From Question 1 it was clear that sensor E measured higher temperatures than the other sensors. The same distribution as the histograms and density polygons can be seen in the PMF and PDF (Figure \ref{fig:pmf}, \ref{fig:pdf}). The lower and upper tails seem to all have their own "local" peaks. The upper tail also seems to be generally longer than the lower for all sensor. This might be a result of measuring the temperature in the summer, when high values are more likely to occur. The effect is also visible in the CDF, where the lower tail of the curve is steeper than the upper tail. There also seems to be a slight "bump" in the lower tail of the CDF, corresponding with the local peaks in the PMF and PDF. The Temperature variable's probability funcitons look similar to the shapes of the PMF, PDF and CDF of a normal distribution. The peak, or mean, is slightly more to the left then would be expected. This is visible in the CDF as a smaller incline around this area. Why there would be local peaks in the tails is unclear to me. I speculate this might be a characteristic of complicated wheather phenomena, where low or high temperatures in summer only occur under specific special conditions.
+	From Question 1 it was clear that sensor E measured higher temperatures than the other sensors. The same distribution as the histograms and density polygons can be seen in the PMF and PDF (Figure \ref{fig:pmf}, \ref{fig:pdf}). The lower and upper tails seem to all have their own "local" peaks. The upper tail also seems to be generally longer than the lower for all sensor. This might be a result of measuring the temperature in the summer, when high values are more likely to occur. The effect is also visible in the CDF, where the lower tail of the curve is steeper than the upper tail. 
+	
+	\newpage
+	There also seems to be a slight "bump" in the lower tail of the CDF, corresponding with the local peaks in the PMF and PDF. The Temperature variable's probability funcitons look similar to the shapes of the PMF, PDF and CDF of a normal distribution. The peak, or mean, is slightly more to the left then would be expected. This is visible in the CDF as a smaller incline around this area. Why there would be local peaks in the tails is unclear to me. I speculate this might be a characteristic of complicated wheather phenomena, where low or high temperatures in summer only occur under specific special conditions.
 	
 	
 	\begin{figure}[H]
@@ -385,6 +392,9 @@
 		\label{tab:ttestconc}%
 	\end{table}%
 	\FloatBarrier
+	
+	\newpage
+	\bibliography{GEO1001_hw01_bibliography}
 
 
 	
